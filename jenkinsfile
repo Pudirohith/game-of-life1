@@ -22,6 +22,7 @@ pipeline {
   stage ('Sonarqube Analysis'){
            steps {
           withSonarQubeEnv(credentialsId: '9e18948f-0df8-497a-a126-2cac08ff6787'){
+	  mvn -e -B sonar:sonar -Dsonar.java.source=1.8 -Dsonar.host.url="172.31.40.170:9000" -Dsonar.login="admin" -Dsonar.password="admin" -Dsonar.sourceEncoding=UTF-8
     // some block
                  
         }
@@ -29,7 +30,7 @@ pipeline {
 }
 	   stage ('Publishing Artifact') {
 	steps {
-	nexusArtifactUploader credentialsId: '5dabee3b-1e23-4c4d-9de5-87d701b2f16b', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.40.170:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'https://github.com/Pudirohith/game-of-life1.git', version: '4.0.0'
+	nexusArtifactUploader artifactId:'gameoflife1', credentialsId: '5dabee3b-1e23-4c4d-9de5-87d701b2f16b', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.40.170:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-jar', version: '4.0.0'
 	}
       }
     }
