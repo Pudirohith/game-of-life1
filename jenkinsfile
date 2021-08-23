@@ -1,11 +1,5 @@
 pipeline {
    agent any
-    environment {
-
-      sonar_url = 'http://172.31.40.170:9000/'
-      sonar_username = 'admin'
-      sonar_password = 'admin'
- }
     tools {
       // Install the Maven version configured as "M3" and add it to the path.
 	  jdk 'java8'
@@ -16,8 +10,7 @@ pipeline {
    {
    stage('git clone') {
          steps {
-            // Get some code from a GitHub repository
-            git 'https://github.com/snehitha-reddy/Game.git'
+        git branch: 'develop', url: 'https://github.com/Pudirohith/game-of-life1.git'
         }
         
         }
@@ -28,12 +21,14 @@ pipeline {
 	}
   stage ('Sonarqube Analysis'){
            steps {
-           withSonarQubeEnv('sonarqube') {
-           sh '''
-           mvn clean package org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=false
-           mvn -e -B sonar:sonar -Dsonar.java.source=1.8 -Dsonar.host.url="${sonar_url}" -Dsonar.login="${sonar_username}" -Dsonar.password="${sonar_password}" -Dsonar.sourceEncoding=UTF-8
-           '''
+          withSonarQubeEnv(credentialsId: '9e18948f-0df8-497a-a126-2cac08ff6787') {
+    // some block
+                 }
            }
-         }
+	   stage ('Publishing Artifact') {
+	steps {
+	nexusArtifactUploader credentialsId: '5dabee3b-1e23-4c4d-9de5-87d701b2f16b', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.40.170:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'https://github.com/Pudirohith/game-of-life1.git', version: '4.0.0'
+	}
       }
- }
+    }
+  }
