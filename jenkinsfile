@@ -21,7 +21,7 @@ pipeline {
 	}
   stage ('Sonarqube Analysis'){
            steps {
-          withSonarQubeEnv(){
+          withSonarQubeEnv(sonarqube){
 	 sh 'mvn -e -B sonar:sonar -Dsonar.java.source=1.8 -Dsonar.host.url="172.31.40.170:9000" -Dsonar.login="admin" -Dsonar.password="admin" -Dsonar.sourceEncoding=UTF-8'
     // some block
          }
