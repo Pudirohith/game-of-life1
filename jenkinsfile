@@ -27,18 +27,15 @@ pipeline {
 	}
   stage ('Sonarqube Analysis'){
            steps {
-           withSonarQubeEnv('sonarqube') {
-           sh '''
-	   mvn clean package org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=false
-           mvn -e -B sonar:sonar -Dsonar.java.source=1.8 -Dsonar.host.url="${sonar_url}" -Dsonar.login="${sonar_username}" -Dsonar.password="${sonar_password}" -Dsonar.sourceEncoding=UTF-8
-           '''
-           }
+           withSonarQubeEnv(sonarqube){
+	 sh 'mvn -e -B sonar:sonar -Dsonar.java.source=1.8 -Dsonar.host.url="172.31.40.170:9000" -Dsonar.login="admin" -Dsonar.password="admin" -Dsonar.sourceEncoding=UTF-8'
+    // some block
+         }
          }
       }
       stage ('Publishing Artifact') {
 	steps {
-	nexusArtifactUploader artifacts: [[artifactId:'gameoflife1', classifier: '', file: '/var/lib/jenkins/workspace/pipeline-job/gameoflife-build/target/gameoflife-build-1.0-SNAPSHOT.jar', type:'jar', type: 'jar']], credentialsId: '5dabee3b-1e23-4c4d-9de5-87d701b2f16b', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.40.170:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-jar', version: '4.0.0'
-           archiveArtifacts '**/*.jar'
+	nexusPublisher nexusInstanceId: '3.11.20210811-095455.fdf8fec', nexusRepositoryId: 'maven-jar', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/pipeline-job/gameoflife-build/target/gameoflife-build-1.0-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'gameoflife1', groupId: 'com.wakaleo.gameoflife', packaging: 'pom', version: '4.0.0']]]
 	}
      }
   }
