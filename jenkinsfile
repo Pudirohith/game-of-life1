@@ -21,10 +21,11 @@ pipeline {
 	}
   stage ('Sonarqube Analysis'){
            steps {
-          withSonarQubeEnv(credentialsId: '9e18948f-0df8-497a-a126-2cac08ff6787') {
+          withSonarQubeEnv(credentialsId: '9e18948f-0df8-497a-a126-2cac08ff6787')
     // some block
-                 }
-           }
+                 
+        }
+		}
 	   stage ('Publishing Artifact') {
 	steps {
 	nexusArtifactUploader credentialsId: '5dabee3b-1e23-4c4d-9de5-87d701b2f16b', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.40.170:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'https://github.com/Pudirohith/game-of-life1.git', version: '4.0.0'
