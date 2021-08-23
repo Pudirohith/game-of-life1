@@ -10,7 +10,7 @@ pipeline {
    {
    stage('git clone') {
          steps {
-        git branch: 'develop', url: 'https://github.com/Pudirohith/game-of-life1.git'
+        git 'https://github.com/Pudirohith/game-of-life1.git'
         }
         
         }
