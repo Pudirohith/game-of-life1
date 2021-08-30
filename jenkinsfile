@@ -2,13 +2,13 @@ pipeline {
    agent any
     environment {
 
-      sonar_url = 'http://172.31.40.170:9000/'
+      sonar_url = 'http://172.31.6.111:9000/'
       sonar_username = 'admin'
       sonar_password = 'admin'
  }
     tools {
       // Install the Maven version configured as "M3" and add it to the path.
-	  jdk 'java8'
+	  jdk 'Java8'
       maven "Maven3.3.9"
    }
    
@@ -17,7 +17,7 @@ pipeline {
    stage('git clone') {
          steps {
             // Get some code from a GitHub repository
-            git 'https://github.com/Pudirohith/game-of-life1.git'
+            git 'https://github.com/Shilpavsqe/game-of-life1.git'
         }  
       }
 	stage ('Compile and Build') {
@@ -37,7 +37,7 @@ pipeline {
       }
       stage ('Publishing Artifact') {
 	steps {
-	nexusArtifactUploader artifacts: [[artifactId:'gameoflife1', classifier: '', file: '/var/lib/jenkins/workspace/pipeline-job/gameoflife-build/target/gameoflife-build-1.0-SNAPSHOT.jar', type:'jar', type: 'jar']], credentialsId: '5dabee3b-1e23-4c4d-9de5-87d701b2f16b', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.40.170:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-jar', version: '4.0.0'
+	nexusArtifactUploader artifacts: [[artifactId:'gameoflife', classifier: '', file: '/var/lib/jenkins/workspace/Test-pipeline/gameoflife-build/target/gameoflife-build-1.0-SNAPSHOT.jar', type:'jar', type: 'jar']], credentialsId: '25e8f6b2-8c1e-49b9-9f7b-485c40a57b82', groupId: 'com.wakaleo.gameoflife', nexusUrl: '172.31.6.111:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Shilpa', version: '4.0.0'
            archiveArtifacts '**/*.jar'
 	}
      }
