@@ -5,8 +5,9 @@ pipeline {
       sonar_url = 'http://172.31.85.107:9000/'
       sonar_username = 'admin'
       sonar_password = 'admin'
-       registry = "https://hub.docker.com/r/pudirohith/game:v2"
+        registry = "https://hub.docker.com/repository/docker/pudirohith/game"
         registryCredential = '5b0f192e-d15d-4a20-84e6-30fa1c4ca53a'
+	dockerImage = 'pudirohith/game:v2'
  }
     tools {
       // Install the Maven version configured as "M3" and add it to the path.
@@ -52,12 +53,12 @@ pipeline {
       }
     }
     stage('Docker publish') {
-     steps { 
-           stage{
-                    docker.withRegistry( 'https://hub.docker.com/r/pudirohith/game:v2', 5b0f192e-d15d-4a20-84e6-30fa1c4ca53a ) {
-		    docker push ( pudirohith/game:v2 )
-		    }
-		  }
+    steps {
+       script { 
+               docker.withRegistry( 'https://hub.docker.com/repository/docker/pudirohith/game', registryCredential ) {
+                        dockerImage.push()
+                    }
+                } 
                }
           }
      }
