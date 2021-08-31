@@ -54,11 +54,11 @@ pipeline {
     stage('Docker publish') {
      steps { 
            stage{
-                    docker.withRegistry( '', registryCredential ) {
-		    docker push (pudirohith/game:v2) 
+                    docker.withRegistry( 'https://hub.docker.com/r/pudirohith/game:v2', 5b0f192e-d15d-4a20-84e6-30fa1c4ca53a ) {
+		    docker push pudirohith/game:v2
 		    }
 		  }
                }
           }
-  }
+     }
 }
