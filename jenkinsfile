@@ -49,5 +49,13 @@ pipeline {
 	'''
       }
     }
+    stage('Docker publish') {
+      agent any
+      steps {
+        sh '''
+	docker push pudirohith/game1.0:v1
+	'''
+      }
+    }
   }
 }
