@@ -46,7 +46,8 @@ pipeline {
       steps {
         sh '''
 	cd ${WORKSPACE}
-	docker build -t pudirohith/game1.0:v1 .'
+	docker build -t pudirohith/game1.0:v1 .
+	'''
       }
     }
   }
