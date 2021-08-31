@@ -56,8 +56,7 @@ pipeline {
      steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
-                    docker push pudirohith/game1.0:v1
-                    }
+                    docker push pudirohith/game1.0:v1 }
                 }
             }
 	}
