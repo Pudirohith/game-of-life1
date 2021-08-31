@@ -7,7 +7,6 @@ pipeline {
       sonar_password = 'admin'
        registry = "https://hub.docker.com/r/pudirohith/game1.0"
         registryCredential = '5b0f192e-d15d-4a20-84e6-30fa1c4ca53a'
-	dockerImage = 'pudirohith/game1.0:v1'
  }
     tools {
       // Install the Maven version configured as "M3" and add it to the path.
@@ -56,7 +55,7 @@ pipeline {
      steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
-                    dockerImage.push[]
+                    docker push pudirohith/game1.0:v1
 		  }
 		}
                }
