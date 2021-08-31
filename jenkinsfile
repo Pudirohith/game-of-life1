@@ -55,7 +55,7 @@ pipeline {
      steps { 
            stage{
                     docker.withRegistry( 'https://hub.docker.com/r/pudirohith/game:v2', 5b0f192e-d15d-4a20-84e6-30fa1c4ca53a ) {
-		    docker push pudirohith/game:v2
+		    docker push ( pudirohith/game:v2 )
 		    }
 		  }
                }
