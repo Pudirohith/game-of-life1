@@ -44,7 +44,9 @@ pipeline {
      stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t pudirohith/game1.0:v1 .'
+        sh '''
+	cd ${WORKSPACE}
+	docker build -t pudirohith/game1.0:v1 .'
       }
     }
   }
