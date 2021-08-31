@@ -53,11 +53,13 @@ pipeline {
     }
     stage('Docker publish') {
      steps { 
+           stage{
                     docker.withRegistry( '', registryCredential ) {
 		    sh '''
 		    docker push pudirohith/game1.0:v1 
 		    '''
 		    }
+		  }
                }
           }
   }
