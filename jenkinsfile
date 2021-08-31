@@ -6,7 +6,7 @@ pipeline {
       sonar_username = 'admin'
       sonar_password = 'admin'
         registry = "https://hub.docker.com/v2/"
-        registryCredential = '5b0f192e-d15d-4a20-84e6-30fa1c4ca53a'
+        registryCredential = 'de878e7e-a859-475b-9d41-accd6c781854'
 	dockerImage = 'pudirohith/game1.0:v1'
  }
     tools {
