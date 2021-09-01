@@ -54,10 +54,11 @@ pipeline {
     }
     stage('Docker publish') {
     steps {
-      sh '''
-      docker login -u="pudirohith" -p="sietkmech3"
-      docker push pudirohith/game1.0:v1
-        '''
+      script { 
+               docker.withRegistry('https://hub.docker.com/repository/docker/pudirohith/game1.0', registryCredential ) {
+                        dockerImage.push()
+                    }
+                } 
 	}
           }
      }
