@@ -53,7 +53,7 @@ pipeline {
     steps {
     script {
         withDockerRegistry([ credentialsId: "de878e7e-a859-475b-9d41-accd6c781854", url: "https://docker.io/" ]) {
-           docker push docker.io/pudirohith/game1.0:v1
+         sh 'docker push docker.io/pudirohith/game1.0:v1'
 	  }
         }
       }
