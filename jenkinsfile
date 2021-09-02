@@ -51,10 +51,12 @@ pipeline {
     }
     stage('Docker publish') {
     steps {
+    script {
         withDockerRegistry([ credentialsId: "de878e7e-a859-475b-9d41-accd6c781854", url: "https://registry.hub.docker.com/" ]) {
           sh 'docker push pudirohith/game1.0:v1 '
+	  }
         }
       }
-          }
      }
+   }
 }
